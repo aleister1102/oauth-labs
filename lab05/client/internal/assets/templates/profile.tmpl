@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Profile</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        {{ template "navigation" . }}
+        <main class="ui main text container">
+            <h1 class="ui header">Thanks for signing in!</h1>
+            <p>To change your profile details, please visit <a href="{{ .AuthorizationServerURL }}">{{ .AuthorizationServerURL }}</a>.</p>
+            <form class="ui form" readonly autocomplete="off">
+                <div class="field">
+                    <label>Firstname</label>
+                    <input type="text" value="{{ .Profile.Firstname }}" readonly>
+                </div>
+                <div class="field">
+                    <label>Lastname</label>
+                    <input type="text" value="{{ .Profile.Lastname }}" readonly>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" value="{{ .Profile.Email }}" readonly>
+                </div>
+                {{ if .Profile.Extra }}
+                <div class="field">
+                    <label>Extra</label>
+                    <input type="text" value="{{ .Profile.Extra }}" readonly>
+                </div>
+                {{ else }}
+                <p>... hrm something seems to be missing.</p>
+                {{ end }}
+            </form>
+        </main>
+    </body>
+</html>

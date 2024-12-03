@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Profile</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        {{ template "navigation" . }}
+        <main class="ui main text container">
+            <h1 class="ui header">Profile</h1>
+            {{ if .User.AvatarURL }}
+                <img id="user-avatar" class="ui circular image" src="{{ .User.AvatarURL }}" width="160" height="160">
+            {{ end }}
+            <form class="ui left floated form" action="/profile" method="POST">
+                <input type="hidden" name="user_id" value="{{ .User.ID }}">
+                <div class="field">
+                    <label>Avatar URL</label>
+                    <input type="url" maxlength="240" name="avatar_url" placeholder="{{ if eq .User.AvatarURL "" }}http://...{{ else }}{{ .User.AvatarURL }}{{ end }}" value="{{ .User.AvatarURL }}">
+                </div>
+                <div class="field">
+                    <label>Firstname</label>
+                    <input type="text" maxlength="100" name="firstname" placeholder="{{ if eq .User.Firstname "" }}Firstname{{ else }}{{ .User.Firstname }}{{ end }}" value="{{ .User.Firstname }}">
+                </div>
+                <div class="field">
+                    <label>Lastname</label>
+                    <input type="text" maxlength="100" name="lastname" placeholder="{{ if eq .User.Lastname "" }}Lastname{{ else }}{{ .User.Lastname }}{{ end }}" value="{{ .User.Lastname }}">
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" maxlength="100" name="email" placeholder="{{ if eq .User.Email "" }}example@oauth.labs{{ else }}{{ .User.Email }}{{ end }}" value="{{ .User.Email }}">
+                </div>
+                <button class="ui button" type="submit">Save</button>
+            </form>
+        </main>
+    </body>
+</html>

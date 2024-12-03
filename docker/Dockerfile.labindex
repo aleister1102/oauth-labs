@@ -1,0 +1,32 @@
+FROM golang:1.23.2-alpine3.19 AS build
+
+EXPOSE 3000
+
+ENV CGO_ENABLED=0
+ENV GOPATH=/go
+ENV GOCACHE=/root/.cache/go-build
+
+WORKDIR /go/src/github.com/cydave/oauth-labs/labindex/
+
+COPY ./labindex/go.mod ./labindex/go.sum .
+RUN go mod download
+
+COPY ./labindex/ .
+RUN --mount=type=cache,target="/root/.cache/go-build" \
+    go build -mod=readonly -ldflags="-s -w" -o /app/server ./cmd/server/main.go
+
+
+FROM golang:1.23.2-alpine3.19 AS final
+
+WORKDIR /app
+
+COPY --from=build /app/server /app/server
+
+RUN addgroup -S user \
+    && adduser -S user -G user -u 1000 \
+    && chown -R user:user /app
+
+USER user
+
+CMD ["/app/server", "/app/config.yaml"]
+

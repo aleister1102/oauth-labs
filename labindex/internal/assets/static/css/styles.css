@@ -1,0 +1,92 @@
+/* fira-code-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/fira-code-v22-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('/static/fonts/fira-code-v22-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/static/fonts/fira-code-v22-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+       url('/static/fonts/fira-code-v22-latin-regular.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
+       url('/static/fonts/fira-code-v22-latin-regular.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
+       url('/static/fonts/fira-code-v22-latin-regular.svg#FiraCode') format('svg'); /* Legacy iOS */
+}
+
+#nav {
+    border-radius: 0;
+    background-color: #222222 !important;
+    margin: 0;
+    padding: 0;
+}
+
+#navpad {
+    padding: 30px;
+}
+
+.logo {
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.primary {
+    background-color: #222222 !important;
+}
+
+.primary:hover {
+    background-color: #000000 !important;
+}
+
+.ui.inverted.menu .item::before {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+
+.card > .content:not(.extra) {
+    display: flex;
+    align-content: center;
+    min-height: 200px;
+    background-color: #1a1b1c !important;
+    text-align: center;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.content:not(.extra) .text {
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Fira Code', 'monospace' !important;
+}
+
+.placeholder-card {
+    border: 4px dashed rgba(34,36,38,.1) !important;
+    border-radius: 5px;
+    transform: none !important;
+    color: rgba(0,0,0,.4) !important;
+    box-shadow: none !important;
+}
+
+.placeholder-card:hover {
+    border: 4px dashed rgba(34,36,38,.9) !important;
+    border-radius: 5px;
+    transform: none !important;
+    color: rgba(0,0,0,.4) !important;
+    box-shadow: none !important;
+}
+
+.placeholder-card .content:not(.extra) {
+    background-color: #ffffff !important;
+}
+
+.placeholder-card span.text {
+    color: rgba(0,0,0,.4) !important;
+}

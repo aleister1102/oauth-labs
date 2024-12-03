@@ -1,0 +1,44 @@
+server:
+  host: '127.0.0.1'
+  port: 3001
+
+database:
+  host: '127.0.0.1'
+  port: 3306
+  name: 'client02'
+  username: 'client02'
+  password: '8WLbZdzlghcne7aY1rm5LuF3jQ3uYfH7Q'
+
+client:
+  id: 'd6a70416-a8ee-4b13-8fd6-cfb2a8bd2ee2'
+  name: 'client-02'
+  secret: '3OAmvQp8uff2S91AczHWTqnF4X6DUVfl1'
+  scopes:
+    - 'read:profile'
+  uri: 'http://127.0.0.1:3001'
+  logo_uri: 'http://127.0.0.1:3001/static/img/logo.png'
+  redirect_uri: 'http://127.0.0.1:3001/callback'
+
+authorization_server:
+  issuer: 'http://127.0.0.1:3000'
+  authorize_uri: 'http://127.0.0.1:3000/oauth/authorize'
+  token_uri: 'http://127.0.0.1:3000/oauth/token'
+  jwk_uri: 'http://127.0.0.1:3000/.well-known/jwks.json'
+  revocation_uri: 'http://127.0.0.1:3000/oauth/revoke'
+  register_uri: 'http://127.0.0.1:3000/oauth/register'
+  registration_secret: 'e68901c3a5357d1b65132535f7359ebef47070805bb90b32e2798d1ec770a4f4'
+
+resource_server:
+  base_url: 'http://127.0.0.1:3000'
+
+cookie:
+  secret: '4373ddb6344d9100b3eaddc1d6c1d0df6b3387666f5a4eacd0e75c29283b05ce'
+  secure: false
+  samesite: 'lax'
+  path: '/'
+  domain: '127.0.0.1'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  database: 0

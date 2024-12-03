@@ -1,0 +1,56 @@
+server:
+  host: '127.0.0.1'
+  port: 3000
+
+database:
+  host: '127.0.0.1'
+  port: 3306
+  name: 'server00'
+  username: 'server00'
+  password: '531hTODRLhYtTSNgoW82EbPX7eG3KdBS'
+
+oauth:
+  issuer: 'http://127.0.0.1:3000'
+  registration_secret: 904127870418b22a23ff07989374ea2842ca3785a3e0b6b5c33d8303d3fde977
+  allowed_clients:
+    - 5cdad30c-09b3-4317-9290-10e1462d88ea
+  encryption_key: 6d840b766595bb21a7bdff3303ad024ab07abf3dcf94dd00cdff937aa95bc8dd # openssl rand -hex 32
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC2XGRmJnYCy8PN
+    fqFBRet9dx1rmvfxwA15uk7ZmcivQMRNbccuqQeQvABlul6cc4N5yGctflYsY3Vf
+    Gb/9D2pWbMXut4djpDkGUy2EZ62MZhlvkMBTnMqXdmYIszxjHoKI1lNgbqAzDash
+    9rYWiGw8vEPfY3gpggtISOI8tCZEW+mVJFoFmhEccRBoPXKuiEc5kgSDJDW5y0eR
+    CHaadOgIw+EiJK9hQof8+ayo1R0Ljc3NCB50ricnaA8U8blu7rqUAcmidOcYPgPm
+    oLbAaNmmqMZ/ozT9zDfY6tthcKS08d/05cDNlkZ4V29zXP7D8HfDoncTJbqbYzl8
+    en9smWs7AgMBAAECggEAKFjgzckMqymyNLEjtHFn3OaR19D9srsvQBN8hqCDymKm
+    DAuR2j0Ds34lCFznue3E1RkF2wbswf1vZo8n7zGN8Xk3gc2RYvZet4uHspfNyhZ8
+    4jZAlz9Fg6VqhdpCLhv9/ZCN+fP/9cu8ZVNUjj+40udEjRRQ7b4cCO43P/8LyGu8
+    xXBKAHIupyMYSy7tDyqhp3+96sF85HcvNDn8gFdIPstuRO9jLKifYeVLMOJV9XWh
+    deBOk93aKd9x1lf+dpBkeTI35N9eKy/cy8+Vhyd0grWciFwbRnpQSPTiIUhKVyOU
+    8qR9+IEDl+0UM+0EnlHCWyPEzZYyk55wQx8i4v17YQKBgQD8tIkMLHM/dYNdyGQx
+    HfBxc61y7ulLfnR473IdqCJWTD6Eserkwr+F+gvHO2++G4kNPmP/H2qMXTS0Uiq/
+    D3ApsMELCo1avoWUQTXZKKyI+lXGhP4kPjUo01NMdSLb1m/OdgQbHluHROGYepYN
+    sgxmY/vY2cOS90xR0TeoCA8rDwKBgQC4vRDTqVaTDxArstwBi6e10JpALg1xAx+o
+    gaVOYgxcqeH/JFmRoKJKxuPHO90p+cV+v1aSp1FW/7PjqayxYG7DkLhtZUhQxanj
+    eEi7b0CqCmyT9xo7SXv2UUba32h8ZaRjcm1A5CRt1FKG8NiWVYDnjOGWXH/iHj7O
+    yHAk96LtFQKBgQDjdeU97ey2nCHokm2MwHQiyoq/P0kCyQoxqOXAyAxQPUSw0Cys
+    SJd4Er/zTw6fwc00/ImppC+VtHeyL5uGanD9NbotJAxkN8Wo0qGTnEbg7OO0UxUm
+    rk/PNZhu46jC1FvDLPs5JbQhJ+EgDIdwQGlk6G5SnICrkqlBo95DAy4UBQKBgQCk
+    2gJT/r6EyGJTvG3a6zajZhzfvLi96l2rztUmlxQU9Hv5ZASRkViBhe3o8iCvvnVg
+    X3nvsGNDUTbDp7u1JSpyVYheBo17loe9tq6go+x+UIMHnu/HjBGUgn7J/aaNq14A
+    aDHaQDvJzjg+tllv/ajj97GurahorTi66d44/spi6QKBgQC0noAqNp5SpwzAJ8ZE
+    bJc7jemGzI/CZUqJt0FWe3+fqjRjaU9sgivIhN/2Yh6g71TgfyWc3cQ2nixfDcjP
+    6thMU0M3F/1TMwSUp9SzYWAX9fkJ9Q01IHnoNvdbEQ1PzD8kHXpmQPkXwENd/lD3
+    Ii4Df7uVHkGMfPsPGJaF602F6A==
+    -----END PRIVATE KEY-----
+
+cookie:
+  secret: 86c915c7afb5ea13787e25ba4ef0703c1c74842e7c1faeb282be53267aa5b3cf # openssl rand -hex 32
+  path: '/'
+  domain: '127.0.0.1'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  database: 0

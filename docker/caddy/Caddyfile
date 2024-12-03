@@ -1,0 +1,130 @@
+{
+	servers {
+		protocols h1 h2
+	}
+}
+
+(common) {
+	tls internal {
+		ciphers TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+	}
+	encode gzip
+	header {
+		X-Frame-Options "deny"
+		X-XSS-Protection "1; mode=block"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		Strict-Transport-Security "max-age=63072000"
+	}
+}
+
+oauth.labs {
+	import common
+	header {
+		server: oauth.labs
+	}
+	reverse_proxy labindex:3000
+}
+
+victim.oauth.labs {
+	import common
+	header {
+		server: victim.oauth.labs
+	}
+	reverse_proxy victim:3000
+}
+
+server-00.oauth.labs {
+	import common
+	header {
+		server: server-00
+	}
+	reverse_proxy server-00:3000
+}
+
+client-00.oauth.labs {
+	import common
+	header {
+		server: client-00
+	}
+	reverse_proxy client-00:3000
+}
+
+server-01.oauth.labs {
+	import common
+	header {
+		server: server-01
+	}
+	reverse_proxy server-01:3000
+}
+
+client-01.oauth.labs {
+	import common
+	header {
+		server: client-01
+	}
+	reverse_proxy client-01:3000
+}
+
+server-02.oauth.labs {
+	import common
+	header {
+		server: server-02
+	}
+	reverse_proxy server-02:3000
+}
+
+client-02.oauth.labs {
+	import common
+	header {
+		server: client-02
+	}
+	reverse_proxy client-02:3000
+}
+
+server-03.oauth.labs {
+	import common
+	header {
+		server: server-03
+	}
+	reverse_proxy server-03:3000
+}
+
+client-03.oauth.labs {
+	import common
+	header {
+        server: client-03
+	}
+	reverse_proxy client-03:3000
+}
+
+server-04.oauth.labs {
+    import common
+    header {
+        server: server-04
+    }
+    reverse_proxy server-04:3000
+}
+
+client-04.oauth.labs {
+    import common
+    header {
+        server: client-04
+    }
+    reverse_proxy client-04:3000
+}
+server-05.oauth.labs {
+    import common
+    header {
+        server: server-05
+    }
+    reverse_proxy server-05:3000
+}
+
+client-05.oauth.labs {
+    import common
+    header {
+        server: client-05
+    }
+    reverse_proxy client-05:3000
+}

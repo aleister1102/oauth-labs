@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mariadb:11.4.3-noble
+    volumes:
+      - ./docker/db/init.dev.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MARIADB_ROOT_PASSWORD: 'mvxoVKFBQcfkBg7aJ962RJKYZtRgVxGQ'
+    ports:
+      - '127.0.0.1:3306:3306'
+
+  valkey:
+    image: valkey/valkey:8.0.1-alpine
+    ports:
+      - '127.0.0.1:6379:6379'

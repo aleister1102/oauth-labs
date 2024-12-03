@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Sign Up</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body id="register-page">
+        <div class="ui middle aligned center aligned grid">
+            <div class="ui column">
+                <h2 class="ui image header">
+                    <img src="/static/img/logo.png" class="image">
+                    <div class="content">Sign Up</div>
+                </h2>
+                <form id="register-form" class="ui large form" action="/register" method="POST" autocomplete="off">
+                    <div class="ui stacked segment">
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="Username..." autofocus>
+                            </div>
+                        </div>
+                        <div class="required field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="******">
+                            </div>
+                        </div>
+                        <button class="ui fluid large primary submit button">Sign Up</button>
+                    </div>
+                </form>
+                <div class="ui message">
+                    Have an account? <a href="/login">Sign in</a> instead.
+                </div>
+            </div>
+        </div>
+        {{ if .Error }}
+            <script>$(document).ready(function() { showError('{{ .Error }}'); });</script>
+        {{ end }}
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Authorize application</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body id="login-page">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui left aligned image header">
+                    <img src="/static/img/logo.png" class="image">
+                    <div class="content">
+                        Authorize {{ .Client.Name }}
+                    </div>
+                </h2>
+                <form class="ui large form" action="/consents" method="POST" autocomplete="off">
+                    <input type="text" name="client_id" value="{{ .Client.ID }}" hidden aria-hidden>
+                    <input type="text" name="return_to" value="{{ .ReturnTo }}" hidden aria-hidden>
+                    <div class="ui left aligned top attached segment" style="padding: 30px;">
+                        <div class="content">
+                        <p style="font-size: 16px"><strong>{{ .Client.Name }}</strong> wants to access some of your data:</p>
+                        <ul class="ui list">
+                            {{ range .Client.Scope }}
+                            <li>{{ . }}</li>
+                            {{ end }}
+                        </ul>
+                        </div>
+                    </div>
+                    <div class="ui attached stacked segment">
+                        <div class="ui content">
+                            <div class="ui equal width grid">
+                                <div class="row">
+                                    <div class="column">
+                                        <button class="ui fluid large button">Cancel</button>
+                                    </div>
+                                    <div class="column">
+                                        <button id="authorize-btn" class="ui fluid large primary submit button">Authorize</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

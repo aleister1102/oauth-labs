@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Profile</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        {{ template "navigation" . }}
+        <main class="ui main text container">
+            <h1 class="ui header">Profile</h1>
+            <img src="{{ .Profile.AvatarURL }}" width="120" height="120" referrerpolicy="unsafe-url">
+            <p>This profile is private.</p>
+        </main>
+    </body>
+</html>

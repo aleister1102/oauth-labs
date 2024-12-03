@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Authorization Server</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body style="background-color: #222222;">
+        {{ template "navigation" . }}
+        <div class="ui middle aligned center aligned text grid">
+            <div class="ui middle aligned center aligned container" style="margin-top: 20vh;">
+                <img class="logo" src="/static/img/logo.png" width="120" height="120" />
+                <h1 class="ui inverted header">
+                    Welcome to {{ Labname }}
+                </h1>
+            </div>
+        </div>
+    </body>
+</html>

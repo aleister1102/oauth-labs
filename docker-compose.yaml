@@ -1,0 +1,321 @@
+services:
+  caddy:
+    image: caddy
+    ports:
+      - "172.16.16.1:80:80"
+      - "172.16.16.1:443:443"
+    networks:
+      oauth-labs:
+        aliases:
+          - server-00.oauth.labs
+          - client-00.oauth.labs
+          - server-01.oauth.labs
+          - client-01.oauth.labs
+          - server-02.oauth.labs
+          - client-02.oauth.labs
+          - server-03.oauth.labs
+          - client-03.oauth.labs
+          - server-04.oauth.labs
+          - client-04.oauth.labs
+          - server-05.oauth.labs
+          - client-05.oauth.labs
+    environment:
+      - 'TZ=Europe/Zurich'
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./docker/caddy/config:/config
+      - ./docker/caddy/data:/data
+
+  db:
+    image: mariadb:11.4.3-noble
+    volumes:
+      - ./docker/db/init.prod.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - oauth-labs
+    secrets:
+      - db_root_password
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: '/var/run/secrets/db_root_password'
+
+  valkey:
+    image: valkey/valkey:8.0.1-alpine
+    networks:
+      - oauth-labs
+
+  labindex:
+    image: docker.io/library/labindex
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.labindex
+    depends_on:
+      - caddy
+      - valkey
+      - db
+    volumes:
+      - ./docker/labindex/config.yaml:/app/config.yaml
+    networks:
+      - oauth-labs
+    cpus: 1
+    mem_limit: 1g
+
+  victim:
+    image: docker.io/library/victim
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.victim
+    depends_on:
+      - caddy
+      - valkey
+      - db
+    volumes:
+      - ./docker/victim/config.yaml:/app/config.yaml
+    networks:
+      - oauth-labs
+
+  server-00:
+    image: docker.io/library/server-00
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=00'
+        - 'COMPONENT=server'
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab00/server.config.yaml:/app/config.yaml
+    networks:
+      - oauth-labs
+    cpus: 1
+    mem_limit: 1g
+  
+  client-00:
+    image: docker.io/library/client-00
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=00'
+        - 'COMPONENT=client'
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-00
+    networks:
+      - oauth-labs
+    volumes:
+      - ./docker/lab00/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+  server-01:
+    image: docker.io/library/server-01
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=01'
+        - 'COMPONENT=server'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab01/server.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+  
+  client-01:
+    image: docker.io/library/client-01
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=01'
+        - 'COMPONENT=client'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-01
+    volumes:
+      - ./docker/lab01/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+  server-02:
+    image: docker.io/library/server-02
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=02'
+        - 'COMPONENT=server'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab02/server.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+  
+  client-02:
+    image: docker.io/library/client-02
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=02'
+        - 'COMPONENT=client'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-02
+    volumes:
+      - ./docker/lab02/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+  server-03:
+    image: docker.io/library/server-03
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=03'
+        - 'COMPONENT=server'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab03/server.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+  
+  client-03:
+    image: docker.io/library/client-03
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=03'
+        - 'COMPONENT=client'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-03
+    volumes:
+      - ./docker/lab03/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+  server-04:
+    image: docker.io/library/server-04
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=04'
+        - 'COMPONENT=server'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab04/server.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+  
+  client-04:
+    image: docker.io/library/client-04
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=04'
+        - 'COMPONENT=client'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-04
+    volumes:
+      - ./docker/lab04/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+  server-05:
+    image: docker.io/library/server-05
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=05'
+        - 'COMPONENT=server'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+    volumes:
+      - ./docker/lab05/server.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+  
+  client-05:
+    image: docker.io/library/client-05
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.baselab
+      args:
+        - 'LAB_NUMBER=05'
+        - 'COMPONENT=client'
+    networks:
+      - oauth-labs
+    depends_on:
+      - caddy
+      - db
+      - valkey
+      - server-05
+    volumes:
+      - ./docker/lab05/client.config.yaml:/app/config.yaml
+    cpus: 1
+    mem_limit: 1g
+
+secrets:
+  db_root_password:
+    file: ./docker/db/root_password.prod.txt
+
+networks:
+  oauth-labs:
+    name: oauth-labs
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.16.0/24
+          ip_range: 172.16.16.0/24
+          gateway: 172.16.16.1

@@ -1,0 +1,11 @@
+root = "."
+tmp = "/dev/null"
+
+[build]
+include_ext = ["go", "tpl", "tmpl", "html", "css", "js"]
+exclude_dir = ["bin"]
+cmd = "make"
+bin = "./bin/server ./config.yaml"
+
+[misc]
+clean_on_exit = true

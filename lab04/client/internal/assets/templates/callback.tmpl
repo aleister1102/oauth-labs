@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Callback</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        {{ template "navigation" . }}
+        <script>
+            $(document).ready(function() {
+                let params = new URLSearchParams(window.document.location.search);
+                if (params.get('error') != null
+                    || params.get('code') == null
+                    || params.get('state') != '{{ .State }}') {
+                    showError('OAuth callback failed, try again.');
+                    return;
+                }
+
+                // Exchange the authorization code.
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ .TokenURI }}',
+                    headers: { 'Authorization': 'Basic {{ .ClientCredentials }}' },
+                    data: jQuery.param({
+                        'grant_type': 'authorization_code',
+                        'code': params.get('code'),
+                        'redirect_uri': '{{ .RedirectURI }}',
+                    })
+                }).done(function(msg) {
+                    $.ajax({
+                        method: 'POST',
+                        url: '/set-tokens',
+                        headers: { 'Content-Type': 'application/json' },
+                        data: JSON.stringify(msg),
+                    }).done(function() {
+                        window.location.replace('/profile');
+                    }).fail(function() {
+                        showError('OAuth callback failed, try again.');
+                        return;
+                    })
+                }).fail(function() {
+                    showError('OAuth callback failed, try again.');
+                    return;
+                });
+            });
+        </script>
+    </body>
+</html>

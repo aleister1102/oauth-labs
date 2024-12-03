@@ -1,0 +1,45 @@
+#nav {
+    border-radius: 0;
+    background-color: #222222 !important;
+    margin: 0;
+    padding: 0;
+}
+
+#navpad {
+    padding: 30px;
+}
+
+.logo {
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.primary {
+    background-color: #222222 !important;
+}
+
+.primary:hover {
+    background-color: #000000 !important;
+}
+
+.ui.inverted.menu .item::before {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+#login-page,
+#register-page {
+    background-color: #f6f8fa;
+}
+#login-page .grid,
+#register-page .grid {
+    height: 100%;
+}
+#login-form .image,
+#register-form .image {
+    margin-top: -100px;
+}
+#login-page .column,
+#register-page .column {
+    max-width: 450px;
+}

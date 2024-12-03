@@ -1,0 +1,36 @@
+#nav {
+    border-radius: 0;
+    background-color: #222222 !important;
+    margin: 0;
+    padding: 0;
+}
+
+#navpad {
+    padding: 30px;
+}
+
+.logo {
+    border: 1px solid #222;
+    border-radius: 5px;
+}
+
+.primary {
+    background-color: #5A0 !important;
+}
+
+.primary:hover {
+    background-color: rgb(77, 153, 0) !important;
+}
+
+.ui.inverted.menu .item::before {
+    border: none !important;
+    background-color: transparent !important;
+}
+
+#user-avatar {
+    box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15);
+    margin: 20px 0;
+    width: 160px;
+    height: 160px;
+}
+

@@ -1,0 +1,42 @@
+server:
+  host: '127.0.0.1'
+  port: 3001
+
+database:
+  host: '127.0.0.1'
+  port: 3306
+  name: 'client00'
+  username: 'client00'
+  password: 'gpMbgO8SktX83uHbQTweKNbJrA7kmR7c'
+
+client:
+  name: 'client-00'
+  secret: 'Ii2jDTEGAWOW2waZCbUJIdmKpXp9GTBI'
+  scopes:
+    - read:profile
+  uri: 'http://127.0.0.1:3001'
+  logo_uri: 'http://127.0.0.1:3001/static/img/logo.png'
+  redirect_uri: 'http://127.0.0.1:3001/callback'
+
+authorization_server:
+  issuer: http://127.0.0.1:3000
+  authorize_uri: http://127.0.0.1:3000/oauth/authorize
+  token_uri: http://127.0.0.1:3000/oauth/token
+  jwk_uri: http://127.0.0.1:3000/.well-known/jwks.json
+  registration_secret: 904127870418b22a23ff07989374ea2842ca3785a3e0b6b5c33d8303d3fde977
+
+resource_server:
+  base_url: http://127.0.0.1:3000
+
+jwt:
+  encryption_key: a375fcae78757c2ed0e26f2cab286038607812566fb9376dd5e42a9e38cecc16 # openssl rand -hex 32
+
+cookie:
+  secret: 56dcbba9c442081c2d8c27c87bc929560cb2c601553bff31bfec19ebecbe00aa # openssl rand -hex 32
+  path: '/'
+  domain: '127.0.0.1'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  database: 0

@@ -1,0 +1,28 @@
+#nav {
+    border-radius: 0;
+    background-color: #222222 !important;
+    margin: 0;
+    padding: 0;
+}
+
+#navpad {
+    padding: 30px;
+}
+
+.logo {
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.primary {
+    background-color: #222222 !important;
+}
+
+.primary:hover {
+    background-color: #000000 !important;
+}
+
+.ui.inverted.menu .item::before {
+    border: none !important;
+    background-color: transparent !important;
+}

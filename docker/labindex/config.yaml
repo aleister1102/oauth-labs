@@ -1,0 +1,20 @@
+server:
+  host: '0.0.0.0'
+  port: 3000
+
+labs:
+  - number: 1
+    client: 'https://client-01.oauth.labs/'
+    server: 'https://server-01.oauth.labs/'
+  - number: 2
+    client: 'https://client-02.oauth.labs/'
+    server: 'https://server-02.oauth.labs/'
+  - number: 3
+    client: 'https://client-03.oauth.labs/'
+    server: 'https://server-03.oauth.labs/'
+  - number: 4
+    client: 'https://client-04.oauth.labs/'
+    server: 'https://server-04.oauth.labs/'
+  - number: 5
+    client: 'https://client-05.oauth.labs/'
+    server: 'https://server-05.oauth.labs/'

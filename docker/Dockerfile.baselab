@@ -1,0 +1,45 @@
+# This Dockerfile can be re-used across all (most?) of the labs.
+FROM golang:1.23.2-alpine3.19 AS build
+
+EXPOSE 3000
+
+# LAB_NUMBER should be the zero-padded lab number.
+ARG LAB_NUMBER
+
+# COMPONENT should be either 'server' or 'client'.
+ARG COMPONENT
+
+RUN test -n "$LAB_NUMBER" || (echo "build argument LAB_NUMBER not set" && false)
+RUN test -n "$COMPONENT" || (echo "build argument COMPONENT not set" && false)
+
+ENV CGO_ENABLED=0
+ENV GOPATH=/go
+ENV GOCACHE=/root/.cache/go-build
+
+WORKDIR /go/src/github.com/cydave/oauth-labs
+
+COPY ./oalib/ /go/src/github.com/cydave/oauth-labs/oalib
+
+COPY ./lab$LAB_NUMBER/$COMPONENT/go.mod ./lab$LAB_NUMBER/$COMPONENT/go.sum /go/src/github.com/cydave/oauth-labs/lab$LAB_NUMBER/$COMPONENT/
+RUN cd ./lab$LAB_NUMBER/$COMPONENT \
+    && go mod download
+
+COPY ./lab$LAB_NUMBER/$COMPONENT ./lab$LAB_NUMBER/$COMPONENT
+RUN --mount=type=cache,target="/root/.cache/go-build" \
+    cd "./lab$LAB_NUMBER/$COMPONENT" \
+    && go build -mod=readonly -ldflags="-s -w" -o /app/server ./cmd/server/main.go
+
+
+FROM golang:1.23.2-alpine3.19 AS final
+
+WORKDIR /app
+
+COPY --from=build /app/server /app/server
+
+RUN addgroup -S user \
+    && adduser -S user -G user -u 1000 \
+    && chown -R user:user /app
+
+USER user
+
+CMD ["/app/server", "/app/config.yaml"]

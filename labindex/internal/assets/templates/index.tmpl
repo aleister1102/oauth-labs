@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" . }}
+        <title>oauth-labs</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        <div class="ui middle aligned center aligned text grid">
+            <div class="ui middle aligned center aligned container">
+                <h1 class="ui header" style="margin-top: 10vh; margin-bottom: 10vh;">Welcome to oauth-labs</h1>
+                <div class="ui centered aligned text grid container">
+                    <div class="ui three medium cards">
+                        {{ range .Labs }}
+                        <div class="ui medium card">
+                            <div class="content"><span class="ui huge text"> {{ .Number }}</span></div>
+                            <div class="extra content">
+                                <div class="ui basic buttons">
+                                    <a href="{{ .Server }}" class="ui basic button">Server</a>
+                                    <a href="{{ .Client }}" class="ui basic button">Client</a>
+                                </div>
+                            </div>
+                        </div>
+                        {{ end }}
+                        <a class="ui medium link card placeholder-card" href="https://github.com/cyllective/oauth-labs" rel="noopener" target="_blank">
+                            <div class="content"><span class="ui huge text">?</span></div>
+                            <div class="extra content">
+                                <span class="ui text">Contribute</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

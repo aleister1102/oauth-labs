@@ -1,0 +1,58 @@
+server:
+  host: '127.0.0.1'
+  port: 3000
+
+database:
+  host: '127.0.0.1'
+  port: 3306
+  name: 'server01'
+  username: 'server01'
+  password: '8EvEu6pqwwDE4ydtokfs2e9y7Ijxn4UQx'
+
+cookie:
+  secret: '10b7f227ecfe935ec85caa85fd8af2cb7fb1d1bfccd4522206019b2b56d02f46'
+  path: '/'
+  secure: false
+  domain: '127.0.0.1'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  database: 0
+
+oauth:
+  issuer: 'http://127.0.0.1:3000'
+  registration_secret: 'ce14deab40b7ed3a026f0c60a4866c736fee6e9be8d6256382511eb81f11b129'
+  allowed_clients:
+    - '5f2f3953-46f4-4959-bcaf-dd34a9404ae6'
+  encryption_key: 'fc905bbfed3118c6bda45f836e294026db5fad5f5de65529ffa16f739fc445cb'
+  private_key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCp7LglBcqpI6pd
+    HzwXo1e6l0rkE6VEpHBvFF5sCiYDAE9fIS/6VZZ/hlEF4M9SjoQJ3V92oBBdiChF
+    h5BN8Z+KbLQsDelhao9SyQ9daEGRtFZRj5zo8j37bEIgp9eKV/XkS65YvTr4cxXm
+    qBD1zeD4rnOswpRyEThV8QtC7enIeqfDtajGLd6hupKcwHhUDodJP91ubfDJ62pR
+    46LG17255BqgWSaZbFJzP1k8H/rqF5MrDEfp6i6GeeNcP0F2bSB7kskZlfpJ7Uvw
+    t95xAeD+MOEDVsaVXFKZQMfJy6wE0JtPCUJGMc6a5uoc2MiHJG6+ko1+ZdVHf+Li
+    yDxISyoVAgMBAAECggEAKAXv5JZ94sNaCfeEq6unSvV+KAThkS6rJdq2F7v3Mo9E
+    4qr6NjwpB83u8RO/uVoEix9HcDUozaL3m1LgIB+4fH34nQTE0tNqwSzGz/Exunwv
+    taO+KVb/VuQrmi32VGk960ERJmkhxemzf6HX5tGQevp6F/e3x7s7GfD9vkyz2yp3
+    8yvWgzhV9YihnMZJF0QKuHQ0EzTUORh0PNaRD9wdt5mphQuy9cj8QgEt6JXarHL6
+    z+fapYLSdnJKiqfnXxM7Yiu6f4lsciSEA0Yw4WIW7LXAEZ7wWdaMMZLvrLjD/2I1
+    4jyrj5J59bH1hfyAHyh51XQ0Oc6lxk4EdUtdw1+IqQKBgQDmWzomdPfXpPjYJUGP
+    uMA4kG/SwgcrGv7t4HoaUQx7PEyX+AzBJwwfKPzNlF4HTsWQmDJSS19ZER0PqFG1
+    +q13ageIG0f2ShKA7U7JvJd7O4vC3gpNIwY8T/vw0cxTqhsHYL12euXfOVkSOoEC
+    i6xUhVs6jcY96z87uYCdoGB5GQKBgQC810pDUQbogNqJQAsl5KstBtn95637fQCB
+    lE4GgrfxHJ79+JEwIe4h70qvjDcIYLJBz8Z+IrH06ytdR3NeGcd0rANFnbK4XH7T
+    fcys8ZAEozGsd2H+OGvafUZ1+xy1TYzhLWtY09Ux4JVKSbiP2j/FDCj0bxOyZMSV
+    148nxGIMXQKBgGxHuZ/WH6I4I9jGOnkqaQCttEKnfeMfP3HlsL+qFWngQEi3CpfI
+    mQQUqjCga0qYFnoPcKgKUfl19+kiP7aA7QVSy9OIr1zwGJ6N7hkaE0KUDPA+my0D
+    J602E8FxfNBfB3GCYczNnDw/osTUx0vBB/J69RUjC2qTqBeU7QYrGu4RAoGBAKP3
+    KvwYNq9acmYJvaRBUH/gGxdjOqXKe84HP1hX1+76svJCCY6JZ4L/ixGx5XbYvu51
+    whtzdKD8MMLlbz6dk5myYYTo0G1Toqtv52+irzHXoSHm5qcdxkgHzk5SozKpC1HZ
+    ZgPSqqKMJhRCvoXpMsWdMVJLwAZ9iFOyvxIAakHhAoGBAJIikmii+Yx/1HwQOC0t
+    4MYvaHyJaYq4sHHG1ovwIcRKs3LFUBNZouJEsX4iPBFY7pX+R/OsDj7LJTHgjy5O
+    ANZSxoWhu7tvvtfvAAx0+z0PGn3u3w2gx3EL03JtwYYaKqjoQqVU5h+7PlbdzKlv
+    YgA0yrZ5FPjSzhDaDiKSi/+j
+    -----END PRIVATE KEY-----
+

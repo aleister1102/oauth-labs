@@ -1,0 +1,16 @@
+{{ define "navigation" }}
+<div id="nav" class="ui inverted menu">
+    <div class="ui container">
+        <a href="/" class="header item">
+            <img class="logo" src="/static/img/logo.png">
+        </a>
+
+        <div class="right menu">
+            {{ if eq .IsAuthenticated true }}<a class="item" onclick="logout();">Sign Out</a>{{ end }}
+        </div>
+    </div>
+</div>
+{{ if ne .ActiveNavigation "index" }}
+<div id="navpad"></div>
+{{ end }}
+{{ end }}

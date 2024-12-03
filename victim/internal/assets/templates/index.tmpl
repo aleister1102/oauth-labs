@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>Victim</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        <main class="ui main text container" style="margin-top: 10vh;">
+            <h1 class="ui header">Victim Simulator</h1>
+            <form class="ui form" action="/" method="POST">
+                <div class="field">
+                    <label>Lab</label>
+                    <div class="ui fluid search selection dropdown">
+                        <input type="hidden" name="lab">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Select Lab</div>
+                        <div class="menu">
+                            {{ range .Victims }}
+                                <div class="item" data-value="{{ .Number }}">Lab{{ .Name }}</div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>URL</label>
+                    <input type="url" placeholder="https://..." value="" name="url">
+                </div>
+                <button class="ui button" type="submit">Visit</button>
+            </form>
+        </main>
+        {{ if .Error }}
+        <script>$(document).ready(function() { showError('{{ .Error }}') });</script>
+        {{ else if .Message }}
+        <script>$(document).ready(function() { showMessage('{{ .Message }}') });</script>
+        {{ end }}
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Sign In</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body id="login-page">
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui left aligned image header">
+                    <img src="/static/img/logo.png" class="image">
+                    <div class="content">
+                        Sign In to {{ Labname }}<br/> to continue to {{ .Client.Name }}
+                    </div>
+                </h2>
+                <form id="login-form" class="ui large form" action="/login" method="POST"  autocomplete="off">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="username" placeholder="Username..." autofocus>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="******">
+                            </div>
+                        </div>
+                        <input type="text" name="return_to" value="{{ .ReturnTo }}" hidden aria-hidden="true">
+                        <button class="ui fluid large primary submit button">Sign In</button>
+                    </div>
+                </form>
+
+                <div class="ui message">
+                    New to us? <a href="/register">Sign Up</a>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

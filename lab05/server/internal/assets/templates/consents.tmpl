@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {{ template "meta" }}
+        <title>{{ Labname }} | Consents</title>
+        <link rel="stylesheet" type="text/css" href="/static/vendor/fomantic-ui/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+        <script src="/static/vendor/jquery/jquery.min.js"></script>
+        <script src="/static/vendor/fomantic-ui/semantic.min.js"></script>
+        <script src="/static/js/scripts.js"></script>
+    </head>
+    <body>
+        {{ template "navigation" . }}
+        <main class="ui main text container">
+            <h1 class="ui header">Consents</h1>
+            {{ if .Clients }}
+            {{ $nClients := .Clients|len }}
+            <p>You have granted <strong>{{ $nClients }} application{{ if gt $nClients 1 }}s{{ end }}</strong> access to your account.</p>
+            <div class="ui celled relaxed list">
+                {{ range .Clients }}
+                <div class="item" style="padding-top: 16px; padding-bottom: 16px;">
+                    <div class="right floated content" style="margin-top: 16px;">
+                        <form action="/consents/revoke" method="POST">
+                            <input type="text" name="client_id" value="{{ .ID }}" hidden readonly>
+                            <button class="ui basic red submit button">Revoke</button>
+                        </form>
+                    </div>
+                    <img class="ui image" src="{{ .LogoURI }}" width="60" height="60">
+                    <div class="content" style="margin-top: 6px;">
+                        <h3 class="header">{{ .Name }}</h3>
+                        <div class="description">{{ .URL }}</div>
+                    </div>
+                </div>
+                {{ end }}
+            <div>
+            {{ else }}
+            <p>You haven't authorized any apps.</p>
+            {{ end }}
+        </main>
+    </body>
+</html>

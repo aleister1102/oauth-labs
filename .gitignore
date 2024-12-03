@@ -1,0 +1,14 @@
+.env
+bin/
+tmp/
+docker/caddy/data
+docker/caddy/config
+.cache/
+ignore/
+docker/lab*/client.config.yaml
+docker/lab*/server.config.yaml
+docker/db/root_password.prod.txt
+docker/db/root_password.txt
+docker/db/init.prod.sql
+docker/db/init.sql
+docker/victim/config.yaml

@@ -1,0 +1,20 @@
+server:
+  host: '127.0.0.1'
+  port: 3000
+
+labs:
+  - number: 1
+    client: 'http://127.0.0.1:3001/'
+    server: 'http://127.0.0.1:3000/'
+  - number: 2
+    client: 'http://127.0.0.1:3001/'
+    server: 'http://127.0.0.1:3000/'
+  - number: 3
+    client: 'http://127.0.0.1:3001/'
+    server: 'http://127.0.0.1:3000/'
+  - number: 4
+    client: 'http://127.0.0.1:3001/'
+    server: 'http://127.0.0.1:3000/'
+  - number: 5
+    client: 'http://127.0.0.1:3001/'
+    server: 'http://127.0.0.1:3000/'
