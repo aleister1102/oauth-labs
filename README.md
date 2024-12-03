@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/github/license/cyllective/oauth-labs)](LICENSE)
+[![License](https://img.shields.io/github/license/cyllective/oauth-labs?_1)](LICENSE)
 
 # OAuth Labs
 
@@ -182,6 +182,6 @@ opening a Pull request!
 
 ## Licensing
 
-[![License](https://img.shields.io/github/license/cyllective/oauth-labs)](LICENSE)
+[![License](https://img.shields.io/github/license/cyllective/oauth-labs?_1)](LICENSE)
 
 This program is free software: you can redistribute it and/or modify it under the terms of the [MIT license](LICENSE).
