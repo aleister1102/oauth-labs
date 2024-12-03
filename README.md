@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/cyllective/oauth-labs)](https://goreportcard.com/report/github.com/cyllective/oauth-labs) [![License](https://img.shields.io/github/license/cyllective/oauth-labs)](LICENSE)
+[![License](https://img.shields.io/github/license/cyllective/oauth-labs)](LICENSE)
 
 # OAuth Labs
 
