@@ -1,4 +1,7 @@
-docker/
+docker/db
+docker/lab*
+docker/caddy
+docker/victim
 .git/
 tmp/
 config.yaml
