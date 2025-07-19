@@ -90,7 +90,7 @@ services:
       - oauth-labs
     cpus: 1
     mem_limit: 1g
-  
+
   client-00:
     image: docker.io/library/client-00
     build:
@@ -129,7 +129,7 @@ services:
       - ./docker/lab01/server.config.yaml:/app/config.yaml
     cpus: 1
     mem_limit: 1g
-  
+
   client-01:
     image: docker.io/library/client-01
     build:
@@ -168,7 +168,7 @@ services:
       - ./docker/lab02/server.config.yaml:/app/config.yaml
     cpus: 1
     mem_limit: 1g
-  
+
   client-02:
     image: docker.io/library/client-02
     build:
@@ -207,7 +207,7 @@ services:
       - ./docker/lab03/server.config.yaml:/app/config.yaml
     cpus: 1
     mem_limit: 1g
-  
+
   client-03:
     image: docker.io/library/client-03
     build:
@@ -246,7 +246,7 @@ services:
       - ./docker/lab04/server.config.yaml:/app/config.yaml
     cpus: 1
     mem_limit: 1g
-  
+
   client-04:
     image: docker.io/library/client-04
     build:
@@ -285,7 +285,7 @@ services:
       - ./docker/lab05/server.config.yaml:/app/config.yaml
     cpus: 1
     mem_limit: 1g
-  
+
   client-05:
     image: docker.io/library/client-05
     build:
