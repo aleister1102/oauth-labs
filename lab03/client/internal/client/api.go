@@ -38,7 +38,12 @@ func NewAPIClient(ctx context.Context, tokens *oauth2.Token) *APIClient {
 	}
 	oacfg := config.GetOAuthConfig()
 	oactx := context.WithValue(ctx, oauth2.HTTPClient, client)
-	client = oauth2.NewClient(oactx, oacfg.TokenSource(oactx, tokens))
+
+	// Handle nil tokens for public access
+	if tokens != nil {
+		client = oauth2.NewClient(oactx, oacfg.TokenSource(oactx, tokens))
+	}
+
 	return &APIClient{
 		ctx:       oactx,
 		config:    oacfg,
@@ -50,6 +55,15 @@ func NewAPIClient(ctx context.Context, tokens *oauth2.Token) *APIClient {
 
 func (o *APIClient) GetProfile(id string) (*dto.Profile, error) {
 	url := fmt.Sprintf("%s/api/users/%s", o.baseURL, id)
+	var profile dto.Profile
+	if err := o.getJSON(o.ctx, url, &profile); err != nil {
+		return nil, err
+	}
+	return &profile, nil
+}
+
+func (o *APIClient) GetPublicProfile(id string) (*dto.Profile, error) {
+	url := fmt.Sprintf("%s/api/users/%s/public", o.baseURL, id)
 	var profile dto.Profile
 	if err := o.getJSON(o.ctx, url, &profile); err != nil {
 		return nil, err

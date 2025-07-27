@@ -84,3 +84,29 @@ func (u *UserController) User(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, profile)
 }
+
+// GET /api/users/:id/public
+func (u *UserController) PublicProfile(c *gin.Context) {
+	id, err := utils.GetUUID(c.Param("id"))
+	if err != nil {
+		log.Printf("[UserController.PublicProfile]: error: %s", err.Error())
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "user not found",
+		})
+		return
+	}
+	user, err := u.userService.Get(c.Request.Context(), id)
+	if err != nil {
+		log.Printf("[UserController.PublicProfile]: error: %s", err.Error())
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "user not found",
+		})
+		return
+	}
+
+	profile := &dto.Profile{
+		ID:        user.ID,
+		AvatarURL: user.AvatarURL,
+	}
+	c.JSON(http.StatusOK, profile)
+}

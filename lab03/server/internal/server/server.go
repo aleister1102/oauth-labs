@@ -178,6 +178,9 @@ func configureRoutes(r *gin.Engine) error {
 		api := r.Group("/api", middlewares.NoCache(), middlewares.JWTRequired(tokenService))
 		api.GET("/users/me", scopesRequired("read:profile"), c.Me)
 		api.GET("/users/:id", scopesRequired("read:profile"), c.User)
+
+		// Public endpoint without JWT requirement
+		r.GET("/api/users/:id/public", middlewares.NoCache(), c.PublicProfile)
 	}
 
 	return nil

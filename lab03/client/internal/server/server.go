@@ -16,7 +16,6 @@ import (
 	"github.com/cyllective/oauth-labs/lab03/client/internal/config"
 	"github.com/cyllective/oauth-labs/lab03/client/internal/constants"
 	"github.com/cyllective/oauth-labs/lab03/client/internal/controllers"
-	ierrors "github.com/cyllective/oauth-labs/lab03/client/internal/errors"
 	"github.com/cyllective/oauth-labs/lab03/client/internal/middlewares"
 	"github.com/cyllective/oauth-labs/lab03/client/internal/services"
 	"github.com/cyllective/oauth-labs/lab03/client/internal/session"
@@ -118,74 +117,57 @@ func configureRoutes(r *gin.Engine) error {
 		c.Redirect(http.StatusFound, "/profile/"+accessToken.Subject())
 	})
 
-	r.GET("/profile/:id", middlewares.NoCache(), middlewares.TokensRequired(tokenService), func(c *gin.Context) {
+	r.GET("/profile/:id", middlewares.NoCache(), func(c *gin.Context) {
 		s := sessions.Default(c)
-		tokens, err := tokenService.Get(s)
-		if err != nil {
-			log.Printf("[Profile]: error: %s", err.Error())
-			session.Delete(s)
-			c.HTML(http.StatusInternalServerError, "error.tmpl", gin.H{
-				"Status": "500",
-				"Error":  "Hrm... something broke.",
-			})
-			return
-		}
-		accessToken, err := tokenService.Parse(tokens.AccessToken)
-		if err != nil {
-			session.Delete(s)
-			c.HTML(http.StatusInternalServerError, "error.tmpl", gin.H{
-				"Status": "500",
-				"Error":  "Hrm... something broke.",
-			})
-			return
-		}
-
-		clnt := client.NewAPIClient(c.Request.Context(), tokens)
 		id, err := utils.GetUUID(c.Param("id"))
 		if err != nil {
 			log.Printf("[Profile]: failed to convert id to uuid: %s", err.Error())
 			c.HTML(http.StatusNotFound, "error.tmpl", gin.H{
-				"Status":          "404",
-				"Error":           "Profile not found",
-				"IsAuthenticated": true,
+				"Status": "404",
+				"Error":  "Profile not found",
 			})
 			return
 		}
-		profile, err := clnt.GetProfile(id)
-		if err != nil {
-			if err.(ierrors.APIError).StatusCode != 404 {
-				// Although we have a token, we can't seem to use it.
-				// This may be due to user initiated revocations.
-				// Assume the token is unusable and terminate the session.
-				log.Printf("[Profile]: failed to get profile: %s", err.Error())
-				session.Delete(s)
-				c.Redirect(http.StatusFound, "/")
+
+		// Check if user is authenticated and viewing own profile
+		tokens, authErr := tokenService.Get(s)
+		if authErr == nil {
+			accessToken, parseErr := tokenService.Parse(tokens.AccessToken)
+			if parseErr == nil && id == accessToken.Subject() {
+				// Authenticated user viewing own profile - show full profile
+				clnt := client.NewAPIClient(c.Request.Context(), tokens)
+				profile, err := clnt.GetProfile(id)
+				if err != nil {
+					log.Printf("[Profile]: failed to get own profile: %s", err.Error())
+					session.Delete(s)
+					c.Redirect(http.StatusFound, "/")
+					return
+				}
+
+				cfg := config.Get()
+				c.HTML(http.StatusOK, "profile.tmpl", gin.H{
+					"Profile":                profile,
+					"IsAuthenticated":        true,
+					"AuthorizationServerURL": cfg.GetString("authorization_server.issuer"),
+				})
 				return
 			}
+		}
 
+		// Not authenticated OR viewing other's profile → Show public private profile
+		clnt := client.NewAPIClient(c.Request.Context(), nil)
+		profile, err := clnt.GetPublicProfile(id)
+		if err != nil {
 			c.HTML(http.StatusNotFound, "error.tmpl", gin.H{
-				"Status":          "404",
-				"Error":           "Profile not found",
-				"IsAuthenticated": true,
+				"Status": "404",
+				"Error":  "Profile not found",
 			})
 			return
 		}
 
-		// Render the private profile if the current user's id doesn't match
-		// the requested one.
-		if profile.ID != accessToken.Subject() {
-			c.HTML(http.StatusOK, "private_profile.tmpl", gin.H{
-				"Profile":         profile,
-				"IsAuthenticated": true,
-			})
-			return
-		}
-
-		cfg := config.Get()
-		c.HTML(http.StatusOK, "profile.tmpl", gin.H{
-			"Profile":                profile,
-			"IsAuthenticated":        true,
-			"AuthorizationServerURL": cfg.GetString("authorization_server.issuer"),
+		c.HTML(http.StatusOK, "private_profile.tmpl", gin.H{
+			"Profile":         profile,
+			"IsAuthenticated": authErr == nil,
 		})
 	})
 
